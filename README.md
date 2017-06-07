@@ -158,7 +158,7 @@ ALL DONE. New chains are in example/hg38.mm10.chr1.cleaned.chain. Deleted suspec
 
 # chainNet
 Given a set of alignment chains, chainNet produces alignment nets, which is a hierarchical collection of chains or parts of chains that attempt to capture only orthologous alignments [3]. 
-The original chainNet the score of "sub-net" (nets that come from a part of a chain and fill a gap in a higher-level net) by the fraction of aligning bases. This can lead to a bias in case the aligning blocks of a chain are not equally distributed. We implemented a new parameter "-rescore" in chainNet that computes the real score of each subnet [2].
+The original chainNet implementation approximates the score of "sub-nets" (nets that come from a part of a chain and fill a gap in a higher-level net) by the fraction of aligning bases. This can lead to a bias in case the aligning blocks of a chain are not equally distributed. We implemented a new parameter "-rescore" in chainNet that computes the real score of each subnet [2].
 
 __Usage:__
 ```
@@ -184,8 +184,7 @@ Call chainNet without any parameters to see the full parameter list.
 
 # Non-nested net filtering
 Before building a multiple alignment from the pairwise alignment nets, it is recommended to remove low-scoring alignment nets that are unlikely to represent real homologies.
-While the netFilter program [3] removes nets that do not satisfy the specified score and size criteria including all nested nets, 
-NetFilterNonNested.perl applies a non-nested filtering procedure that considers and filters each net individually [1]. 
+While the netFilter program [3] removes nested nets in case their parent net does not satisfy the specified score and size criteria, NetFilterNonNested.perl applies a non-nested filtering procedure that considers and filters each net individually [1]. 
 This avoids removing nested nets that would satisfy the specified criteria, even if a parent net is removed. 
 
 __Usage:__
