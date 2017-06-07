@@ -190,12 +190,12 @@ This avoids removing nested nets that would satisfy the specified criteria, even
 __Usage:__
 In [1], we applied the following filter criteria:
 
-* UCSC "syntenic net" criteria (thresholds: minTopScore=300000, minSynScore=200000, minSynSize=20000, minSynAli=10000, maxFar=200000) were applied to all placental mammal alignments that have well-assembled genomes 
-by running 
+* UCSC "syntenic net" criteria (thresholds: minTopScore=300000, minSynScore=200000, minSynSize=20000, minSynAli=10000, maxFar=200000) in addition to keeping all nested nets that align 
+to the same locus (inversions or local translocations) if they score higher than 5000 were applied to all placental mammal alignments that have well-assembled genomes 
 `
 NetFilterNonNested.perl -doUCSCSynFilter -keepSynNetsWithScore 5000 -keepInvNetsWithScore 5000 ref.query.net.gz > ref.query.filtered.net
 `
-* keeping nets that score higher than 100000 and keeping all nested nets that align to the same locus (inversions or local translocations) if they score higher than 5000 for placental mammals with less-well assembled genomes 
+* keeping nets that score higher than 100000 and keeping all nested nets that align to the same locus if they score higher than 5000 for placental mammals with less-well assembled genomes 
 `
 NetFilterNonNested.perl -doScoreFilter -keepSynNetsWithScore 5000 -keepInvNetsWithScore 5000 -minScore1 100000  ref.query.net.gz > ref.query.filtered.net
 `
