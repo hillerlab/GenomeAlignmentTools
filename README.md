@@ -1,6 +1,6 @@
 # Genome Alignment Tools
 
-This repository provides tools for improving the sensitivity and specificity of pairwise genome alignments [1,2]. These tools make use of the alignment chain and net concept [3]. 
+This repository provides tools for improving the sensitivity and specificity of pairwise genome alignments [1,2]. These tools make use of [lastz](http://www.bx.psu.edu/~rsharris/lastz/) and the alignment chain and net concept [3]. 
 
 These tools integrate into the standard lastz/chain/net workflow of genome alignment as follows:
 1. genome-wide local alignments with lastz
