@@ -2,6 +2,14 @@
 
 This repository provides tools for improving the sensitivity and specificity of pairwise genome alignments [1,2]. These tools make use of the alignment chain and net concept [3]. 
 
+These tools integrate into the standard lastz/chain/net workflow of genome alignment as follows:
+1. genome-wide local alignments with lastz
+2. building alignment chains
+3. NEW: highly-sensitive local alignments to improve alignment chains
+4. NEW: chainCleaner to improve the specificity in alignment chains
+5. NEW: chainNet with parameter -rescore computes exact scores of all nets
+6. NEW: non-nested net filtering to obtain
+
 
 # Requirements
 * install [lastz](http://www.bx.psu.edu/~rsharris/lastz/)
@@ -169,3 +177,28 @@ options:
    -qNibDir=fileName           query genome file (2bit or nib format)
 ```
 Call chainNet without any parameters to see the full parameter list.
+
+# Non-nested net filtering
+Before building a multiple alignment from the pairwise alignment nets, it is recommended to remove low-scoring alignment nets that are unlikely to represent real homologies.
+While the netFilter program [3] removes nets that do not satisfy the specified score and size criteria including all nested nets, 
+NetFilterNonNested.perl applies a non-nested filtering procedure that considers and filters each net individually [1]. 
+This avoids removing nested nets that would satisfy the specified criteria, even if a parent net is removed. 
+
+__Usage:__
+In [1], we applied the following filter criteria:
+
+* UCSC "syntenic net" criteria (thresholds: minTopScore=300000, minSynScore=200000, minSynSize=20000, minSynAli=10000, maxFar=200000) were applied to all placental mammal alignments that have well-assembled genomes 
+by running 
+`
+NetFilterNonNested.perl -doUCSCSynFilter -keepSynNetsWithScore 5000 -keepInvNetsWithScore 5000 ref.query.net.gz > ref.query.filtered.net
+`
+* keeping nets that score higher than 100000 and keeping all nested nets that align to the same locus (inversions or local translocations) if they score higher than 5000 for placental mammals with less-well assembled genomes 
+`
+NetFilterNonNested.perl -doScoreFilter -keepSynNetsWithScore 5000 -keepInvNetsWithScore 5000 -minScore1 100000  ref.query.net.gz > ref.query.filtered.net
+`
+* keeping nets that score higher than 10000 and keeping all nested nets that align to the same locus if they score higher than 3000 for non-placental mammals 
+`
+NetFilterNonNested.perl -doScoreFilter -keepSynNetsWithScore 3000 -keepInvNetsWithScore 3000 -minScore1 10000 ref.query.net.gz > ref.query.filtered.net
+`
+
+Call NetFilterNonNested.perl without any parameters to see all filtering options.
