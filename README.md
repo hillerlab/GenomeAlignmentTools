@@ -7,8 +7,8 @@ These tools integrate into the standard lastz/chain/net workflow of genome align
 2. building alignment chains
 3. NEW: highly-sensitive local alignments to improve alignment chains by detecting remote homologies
 4. NEW: chainCleaner to improve the specificity in alignment chains
-5. NEW: chainNet with parameter -rescore computes exact scores of all nets
-6. NEW: non-nested net filtering to obtain
+5. NEW: chainNet with parameter -rescore to compute exact scores of all nets
+6. NEW: non-nested net filtering to keep nets that likely represent orthologous alignments
 
 
 # Requirements
