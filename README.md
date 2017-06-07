@@ -1,6 +1,6 @@
 # Genome Alignment Tools
 
-Tools for improving the sensitivity and specificity of genome alignments
+This repository provides tools for improving the sensitivity and specificity of pairwise genome alignments [1,2]. These tools make use of the alignment chain and net concept [3]. 
 
 
 # Requirements
@@ -32,7 +32,7 @@ The subdirectory precompiledBinary_x86_64/ already contains Linux x86_64 compile
 
 
 # Highly-sensitive local alignments
-patchChain.perl perform a highly sensitive local pairwise alignment for loci flanked by aligning blocks. 
+patchChain.perl perform a highly sensitive local pairwise alignment for loci flanked by aligning blocks [1]. 
 Given an alignment chain [3], it considers all chains that pass the score and span filters (optional parameters), extracts all the unaligning loci and creates local alignment jobs.
 
 __Usage:__
@@ -43,8 +43,7 @@ patchChain.perl chain.infile  2bit_target_fullPath  2bit_query_fullPath  \
 Call patchChain.perl without any parameters to see the full parameter list.
 
 __Example:__
-Here, we use the parameters for highly sensitive local alignments from [1] "Q=/path/to/HoxD55.q K=1500 L=2500 M=0 T=0 W=5"
-The HoxD55 scoring matrix is provided by the kent source code (subdirectory src/blatz/HoxD55.q) and also copied to the example directory.
+Here, we use the parameters for highly sensitive local alignments from [1] and the HoxD55 scoring matrix (provided by the kent source code (subdirectory src/blatz/HoxD55.q); also contained in the example directory).
 ```
 patchChain.perl example/hg38.danRer10.chain example/hg38.2bit example/danRer10.2bit example/hg38.chrom.sizes example/danRer10.chrom.sizes \
     -chainMinScore 5000 -gapMaxSizeT 500000 -gapMaxSizeQ 500000 -gapMinSizeT 30 -gapMinSizeQ 30 \
@@ -68,4 +67,78 @@ find pslOutput -name "*.psl" | xargs -i cat {} > newAlignments.psl
 cat genomeWide.lastz.psl newAlignments.psl > all.psl 
 
 # use axtChain from the Kent source to compute alignment chains that include the new alignments
+```
 
+# chainCleaner
+chainCleaner improves the specificity in genome alignment chains by detecting and removing local alignments that obscure the evolutionary history of genomic rearrangements [2].
+The input is a chain file, ideally after adding alignments found with highly sensitive parameters if distal species are compared.
+The output is a chain file that contains re-scored and score-sorted chains after removing the local alignments from the parent chains and adding them as individual chains. 
+The resulting output file can be used to get alignment nets by running chainNet [3].
+
+
+__Usage:__
+
+```
+chainCleaner in.chain tNibDir qNibDir out.chain out.bed -net=in.net 
+ OR 
+   chainCleaner in.chain tNibDir qNibDir out.chain out.bed -tSizes=/dir/to/target/chrom.sizes -qSizes=/dir/to/query/chrom.sizes 
+ First option:   you have netted the chains and specify the net file via -net=netFile
+ Second option:  you have not netted the chains. Then chainCleaner will net them. In this case, you must specify the chrom.sizes file for the target and query with -tSizes/-qSizes
+ tNibDir/qNibDir are either directories with nib files, or the name of a .2bit file
+
+output:
+   out.chain      output file in chain format containing the untouched chains, the original broken chain and the modified breaking chains. NOTE: this file is chainSort-ed.
+   out.bed        output file in bed format containing the coords and information about the removed chain-breaking alignments.
+```
+
+Call chainCleaner without any parameters to see the full parameter list.
+
+__Example run of chainCleaner:__
+Before executing, download the human and mouse genome.
+```
+wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/hg38.2bit
+wget http://hgdownload.cse.ucsc.edu/goldenPath/mm10/bigZips/mm10.2bit
+mv hg38.2bit mm10.2bit example/
+```
+
+Run chainCleaner on the chains provided in example/
+``` 
+chainCleaner example/hg38.mm10.chr1.chain.gz -tSizes=example/hg38.chrom.sizes -qSizes=example/mm10.chrom.sizes example/hg38.2bit example/mm10.2bit example/hg38.mm10.chr1.cleaned.chain example/removedSuspects.bed -linearGap=loose 
+
+
+Verbosity level: 1
+foldThreshold: 0.000000    LRfoldThreshold: 2.500000   maxSuspectBases: 2147483647  maxSuspectScore: 100000  minBrokenChainScore: 50000  minLRGapSize: 0
+0. need to net the input chains example/hg38.mm10.chr1.chain.gz (no net file given) ...
+		tempfile for netting: tmp.chainCleaner.XLJ2Vxs.net
+Got 455 chroms in example/hg38.chrom.sizes, 66 in example/mm10.chrom.sizes
+Finishing nets
+writing stdout
+writing /dev/null
+DONE (nets in tmp.chainCleaner.XLJ2Vxs.net)
+1. parsing fills/gaps from tmp.chainCleaner.XLJ2Vxs.net and getting valid breaks ...
+1.1 read net file tmp.chainCleaner.XLJ2Vxs.net into memory ...
+DONE
+1.2 get fills/gaps from tmp.chainCleaner.XLJ2Vxs.net ...
+DONE
+1.3 get aligning regions from tmp.chainCleaner.XLJ2Vxs.net ...
+DONE
+1.4 get valid breaks ...
+DONE
+Remove temporary netfile tmp.chainCleaner.XLJ2Vxs.net
+DONE (parsing fills/gaps and getting valid breaks)
+2. reading breaking and broken chains from example/hg38.mm10.chr1.chain.gz and write irrelevant chains to example/hg38.mm10.chr1.cleaned.chain.unsorted ...
+DONE
+3. reading target and query DNA sequences for breaking and broken chains ...
+DONE
+4. loop over all breaks. Remove suspects if they pass our filters and write out deleted suspects to example/removedSuspects.bed ...
+DONE
+5. write the (new) breaking and the broken chains to example/hg38.mm10.chr1.cleaned.chain.unsorted ...
+DONE
+6. chainSort example/hg38.mm10.chr1.cleaned.chain.unsorted example/hg38.mm10.chr1.cleaned.chain ...
+DONE
+7. free memory ...
+DONE
+memory usage 5562015744, utime 1058 s/100, stime 256
+
+ALL DONE. New chains are in example/hg38.mm10.chr1.cleaned.chain. Deleted suspects in example/removedSuspects.bed
+```
