@@ -113,7 +113,9 @@ mv hg38.2bit mm10.2bit example/
 
 Run chainCleaner on the chains provided in example/
 ``` 
-chainCleaner example/hg38.mm10.chr1.chain.gz -tSizes=example/hg38.chrom.sizes -qSizes=example/mm10.chrom.sizes example/hg38.2bit example/mm10.2bit example/hg38.mm10.chr1.cleaned.chain example/removedSuspects.bed -linearGap=loose 
+chainCleaner example/hg38.mm10.chr1.chain.gz -tSizes=example/hg38.chrom.sizes \
+  -qSizes=example/mm10.chrom.sizes example/hg38.2bit example/mm10.2bit \ 
+  example/hg38.mm10.chr1.cleaned.chain example/removedSuspects.bed -linearGap=loose 
 
 
 Verbosity level: 1
