@@ -142,3 +142,30 @@ memory usage 5562015744, utime 1058 s/100, stime 256
 
 ALL DONE. New chains are in example/hg38.mm10.chr1.cleaned.chain. Deleted suspects in example/removedSuspects.bed
 ```
+
+
+# chainNet
+Given a set of alignment chains, chainNet produces alignment nets, which is a hierarchical collection of chains or parts of chains that attempt to capture only orthologous alignments [3]. 
+The original chainNet the score of "sub-net" (nets that come from a part of a chain and fill a gap in a higher-level net) by the fraction of aligning bases. This can lead to a bias in case the aligning blocks of a chain are not equally distributed. We implemented a new parameter "-rescore" in chainNet that computes the real score of each subnet [2].
+
+__Usage:__
+```
+chainNet - Make alignment nets out of chains
+usage:
+   chainNet in.chain target.sizes query.sizes target.net query.net
+where:
+   in.chain is the chain file sorted by score
+   target.sizes contains the size of the target sequences
+   query.sizes contains the size of the query sequences
+   target.net is the output over the target genome
+   query.net is the output over the query genome
+options:
+   -rescore                    compute the real score of the sub-net (instead of approximating it based on the fraction of aligning bases in the subnet)
+                               The real score will be much more precise especially for imbalanced chains where most aligning blocks are on one side.
+                               This flag will set minScore=0. Each subnet with a negative score gets score 1. Afterwards, run a non-nested score filter.
+                               Note: Rescoring is only implemented for the target species net.
+                               With this flag, you need to give the target and query genome sequence (-tNibDir and -qNibDir) and specify -linearGap
+   -tNibDir=fileName           target genome file (2bit or nib format)
+   -qNibDir=fileName           query genome file (2bit or nib format)
+```
+Call chainNet without any parameters to see the full parameter list.
