@@ -40,8 +40,10 @@ The subdirectory precompiledBinary_x86_64/ already contains Linux x86_64 compile
 
 
 # Highly-sensitive local alignments
-patchChain.perl perform a highly sensitive local pairwise alignment for loci flanked by aligning blocks [1]. 
-Given an alignment chain [3], it considers all chains that pass the score and span filters (optional parameters), extracts all the unaligning loci and creates local alignment jobs.
+patchChain.perl performs a highly sensitive local pairwise alignment for loci flanked by aligning blocks [1]. 
+Given an alignment chain [3], it considers all chains that pass the score and span filters (optional parameters), extracts all the unaligning loci and creates local alignment jobs. After executing these alignment jobs, the newly found and the original local alignments are combined and used to produce a new set of improved chains. 
+
+This procedure is recommended for comparisons between species that are separated by >0.75 substitutions per neutral site [1].
 
 __Usage:__
 ```
