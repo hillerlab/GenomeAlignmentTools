@@ -5,7 +5,7 @@ This repository provides tools for improving the sensitivity and specificity of 
 These tools integrate into the standard lastz/chain/net workflow of genome alignment as follows:
 1. genome-wide local alignments with lastz
 2. building alignment chains
-3. NEW: highly-sensitive local alignments to improve alignment chains
+3. NEW: highly-sensitive local alignments to improve alignment chains by detecting remote homologies
 4. NEW: chainCleaner to improve the specificity in alignment chains
 5. NEW: chainNet with parameter -rescore computes exact scores of all nets
 6. NEW: non-nested net filtering to obtain
