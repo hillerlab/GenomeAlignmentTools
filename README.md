@@ -205,3 +205,11 @@ NetFilterNonNested.perl -doScoreFilter -keepSynNetsWithScore 3000 -keepInvNetsWi
 `
 
 Call NetFilterNonNested.perl without any parameters to see all filtering options.
+
+
+# References
+[1] Sharma V, Hiller M. Increased alignment sensitivity improves the usage of genome alignments for comparative gene annotation. Submitted
+
+[2] Suarez H, Langer BE, Ladde P, Hiller M. [chainCleaner improves genome alignment specificity and sensitivity](https://academic.oup.com//bioinformatics/article/33/11/1596/2929344/chainCleaner-improves-genome-alignment-specificity?guestAccessKey=5b9b078a-39e3-49c2-807b-852efe66f366). Bioinformatics, 33(11):1596-1603, 2017
+
+[3] Kent WJ, Baertsch R, Hinrichs A, Miller W, Haussler D. [Evolution's cauldron: duplication, deletion, and rearrangement in the mouse and human genomes](http://www.pnas.org/content/100/20/11484.long). PNAS, 100(20):11484-9, 2003 
