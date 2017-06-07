@@ -27,7 +27,7 @@ These binaries should be located in a directory that is added to your $PATH envi
 # Installation
 The perl and python scripts just need to be copied to a directory that is contained in your $PATH environment variable. 
 Only chainCleaner and the modified chainNet (with the -rescore option) need to be compiled. 
-Since both needs the Kent (UCSC) source code, you need to edit the KENTSRC_DIR variable in src/makefile and set the path to the kent source code (should end with kent/src/).
+Since both tools need the Kent (UCSC) source code, you need to edit the KENTSRC_DIR variable in src/makefile and set the path to the kent source code (should end with kent/src/).
 
 Afterwards, compile chainCleaner and chainNet
 ```
