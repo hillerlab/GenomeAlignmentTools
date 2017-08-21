@@ -208,7 +208,7 @@ Call NetFilterNonNested.perl without any parameters to see all filtering options
 
 
 # References
-[1] Sharma V, Hiller M. Increased alignment sensitivity improves the usage of genome alignments for comparative gene annotation. Submitted
+[1] Sharma V, Hiller M. [Increased alignment sensitivity improves the usage of genome alignments for comparative gene annotation](https://academic.oup.com/nar/article/45/14/8369/3875570/Increased-alignment-sensitivity-improves-the-usage?guestAccessKey=52de9f40-1303-4493-96e9-30def93a259c). Nucleic Acids Res., 45(14), 8369–8377, 2017
 
 [2] Suarez H, Langer BE, Ladde P, Hiller M. [chainCleaner improves genome alignment specificity and sensitivity](https://academic.oup.com//bioinformatics/article/33/11/1596/2929344/chainCleaner-improves-genome-alignment-specificity?guestAccessKey=5b9b078a-39e3-49c2-807b-852efe66f366). Bioinformatics, 33(11):1596-1603, 2017
 
