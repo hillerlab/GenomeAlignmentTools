@@ -1,6 +1,6 @@
 # Genome Alignment Tools
 
-This repository provides tools for improving the sensitivity and specificity of pairwise genome alignments [1,2]. These tools make use of [lastz](http://www.bx.psu.edu/~rsharris/lastz/) and the alignment chain and net concept [3]. 
+This repository provides tools for improving the sensitivity and specificity of pairwise genome alignments [1,2,3]. These tools make use of [lastz](http://www.bx.psu.edu/~rsharris/lastz/) and the alignment chain and net concept [4]. 
 
 These tools integrate into the standard lastz/chain/net workflow of genome alignment as follows:
 1. genome-wide local alignments with lastz
@@ -40,8 +40,8 @@ The subdirectory precompiledBinary_x86_64/ already contains Linux x86_64 compile
 
 
 # Highly-sensitive local alignments
-patchChain.perl performs a highly sensitive local pairwise alignment for loci flanked by aligning blocks [1]. 
-Given an alignment chain [3], it considers all chains that pass the score and span filters (optional parameters), extracts all the unaligning loci and creates local alignment jobs. After executing these alignment jobs, the newly found and the original local alignments are combined and used to produce a new set of improved chains. 
+patchChain.perl performs a highly sensitive local pairwise alignment for loci flanked by aligning blocks [1,3]. 
+Given an alignment chain [4], it considers all chains that pass the score and span filters (optional parameters), extracts all the unaligning loci and creates local alignment jobs. After executing these alignment jobs, the newly found and the original local alignments are combined and used to produce a new set of improved chains. 
 
 This procedure is recommended for comparisons between species that are separated by >0.75 substitutions per neutral site [1].
 
@@ -83,7 +83,7 @@ cat genomeWide.lastz.psl newAlignments.psl > all.psl
 chainCleaner improves the specificity in genome alignment chains by detecting and removing local alignments that obscure the evolutionary history of genomic rearrangements [2].
 The input is a chain file, ideally after adding alignments found with highly sensitive parameters if distal species are compared.
 The output is a chain file that contains re-scored and score-sorted chains after removing the local alignments from the parent chains and adding them as individual chains. 
-The resulting output file can be used to get alignment nets by running chainNet [3].
+The resulting output file can be used to get alignment nets by running chainNet [4].
 
 
 __Usage:__
@@ -157,7 +157,7 @@ ALL DONE. New chains are in example/hg38.mm10.chr1.cleaned.chain. Deleted suspec
 
 
 # chainNet
-Given a set of alignment chains, chainNet produces alignment nets, which is a hierarchical collection of chains or parts of chains that attempt to capture only orthologous alignments [3]. 
+Given a set of alignment chains, chainNet produces alignment nets, which is a hierarchical collection of chains or parts of chains that attempt to capture only orthologous alignments [4]. 
 The original chainNet implementation approximates the score of "sub-nets" (nets that come from a part of a chain and fill a gap in a higher-level net) by the fraction of aligning bases. This can lead to a bias in case the aligning blocks of a chain are not equally distributed. We implemented a new parameter "-rescore" in chainNet that computes the real score of each subnet [2].
 
 __Usage:__
@@ -184,7 +184,7 @@ Call chainNet without any parameters to see the full parameter list.
 
 # Non-nested net filtering
 Before building a multiple alignment from the pairwise alignment nets, it is recommended to remove low-scoring alignment nets that are unlikely to represent real homologies.
-While the netFilter program [3] removes nested nets in case their parent net does not satisfy the specified score and size criteria, NetFilterNonNested.perl applies a non-nested filtering procedure that considers and filters each net individually [1]. 
+While the netFilter program [4] removes nested nets in case their parent net does not satisfy the specified score and size criteria, NetFilterNonNested.perl applies a non-nested filtering procedure that considers and filters each net individually [1,3]. 
 This avoids removing nested nets that would satisfy the specified criteria, even if a parent net is removed. 
 
 __Usage:__
@@ -212,4 +212,6 @@ Call NetFilterNonNested.perl without any parameters to see all filtering options
 
 [2] Suarez H, Langer BE, Ladde P, Hiller M. [chainCleaner improves genome alignment specificity and sensitivity](https://academic.oup.com//bioinformatics/article/33/11/1596/2929344/chainCleaner-improves-genome-alignment-specificity?guestAccessKey=5b9b078a-39e3-49c2-807b-852efe66f366). Bioinformatics, 33(11):1596-1603, 2017
 
-[3] Kent WJ, Baertsch R, Hinrichs A, Miller W, Haussler D. [Evolution's cauldron: duplication, deletion, and rearrangement in the mouse and human genomes](http://www.pnas.org/content/100/20/11484.long). PNAS, 100(20):11484-9, 2003 
+[3] Hiller M, Agarwal S, Notwell JH, Parikh R, Guturu H, Wenger AM, Bejerano G. [Computational methods to detect conserved non-genic elements in phylogenetically isolated genomes: application to zebrafish](https://academic.oup.com/nar/article-lookup/doi/10.1093/nar/gkt557). Nucleic Acids Res, 41(15):e151. 
+
+[4] Kent WJ, Baertsch R, Hinrichs A, Miller W, Haussler D. [Evolution's cauldron: duplication, deletion, and rearrangement in the mouse and human genomes](http://www.pnas.org/content/100/20/11484.long). PNAS, 100(20):11484-9, 2003 
