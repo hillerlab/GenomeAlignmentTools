@@ -18,7 +18,7 @@ These tools integrate into the standard lastz/chain/net workflow of genome align
 # go to whereever you want to have the Kent source code
 cd /path/to/
 # git clone and make the libraries
-git clone http://genome-source.cse.ucsc.edu/kent.git
+git clone https://github.com/ucscGenomeBrowser/kent.git
 cd kent/src
 make USE_SAMTABIX=0 USE_TABIX=0 USE_BAM=0 libs
 ```
