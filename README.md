@@ -34,7 +34,7 @@ The perl and python scripts just need to be copied to a directory that is contai
 Only chainCleaner and the modified chainNet (with the -rescore option) need to be compiled. 
 Since both tools need the Kent (UCSC) source code, you need to set the KENTSRC_DIR variable to the path to the kent source code (should end with kent/src/).
 ```
-export KENTSRC_DIR=/home/hiller/XXXX/kent/src/
+export KENTSRC_DIR=/path/to/kent/src/
 ```
 Afterwards, compile chainCleaner and chainNet
 ```
