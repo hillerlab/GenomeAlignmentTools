@@ -1,5 +1,3 @@
-export KENTSRC_DIR=/path/to/your/kent/src
-
 SUBDIRS = chainCleaner chainNet
 
 .PHONY: all clean $(SUBDIRS)
