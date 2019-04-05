@@ -1,4 +1,4 @@
-KENTSRC_LIBS = $(KENTSRC_DIR)/lib/$(MACHTYPE)/jkhgap.a  $(KENTSRC_DIR)/lib/$(MACHTYPE)/jkweb.a 
+KENTSRC_LIBS = $(KENTSRC_DIR)/lib/$(MACHTYPE)/jkhgap.a  $(KENTSRC_DIR)/lib/$(MACHTYPE)/jkweb.a $(KENTSRC_DIR)/htslib/libhts.a 
 
 INCS = -I$(KENTSRC_DIR)/inc -I$(KENTSRC_DIR)/hg/inc
 LIBS = $(KENTSRC_LIBS) -lm  -lz -lcrypt -lnsl -lssl -lcrypto -lstdc++ -lrt -pthread
