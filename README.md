@@ -18,14 +18,11 @@ These tools integrate into the standard lastz/chain/net workflow of genome align
 # go to whereever you want to have the Kent source code
 cd /path/to/
 # git clone and make the libraries
-git clone https://github.com/ENCODE-DCC/kentUtils.git kent
+git clone https://github.com/ucscGenomeBrowser/kent.git kent
 cd kent
 export USE_SAMTABIX=0
 export USE_SSL=1
-cd src/lib && make && cd ..
-cd jkOwnLib && make && cd ..
-cd parasol && make && cd ..
-cd hg/lib && make && cd ../..
+cd src  && make libs && cd ../..
 ```
 These binaries should be located in a directory that is added to your $PATH environment variable. 
 
