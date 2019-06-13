@@ -33,7 +33,7 @@ Since both tools need the Kent (UCSC) source code, you need to set the KENTSRC_D
 ```
 export KENTSRC_DIR=/path/to/kent/src/
 ```
-Afterwards, compile chainCleaner and chainNet
+Afterwards, compile chainCleaner, chainNet and scoreChain
 ```
 git clone https://github.com/hillerlab/GenomeAlignmentTools.git
 cd GenomeAlignmentTools/src
