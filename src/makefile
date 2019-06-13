@@ -1,4 +1,4 @@
-SUBDIRS = chainCleaner chainNet
+SUBDIRS = chainCleaner chainNet scoreChain
 
 .PHONY: all clean $(SUBDIRS)
 
@@ -12,4 +12,4 @@ clean:
 	@for dir in $(SUBDIRS); do \
 		$(MAKE) clean -C $${dir}; \
 	done
-	@rm -f ../bin/chainCleaner ../bin/chainNet
+	@rm -f ../bin/chainCleaner ../bin/chainNet ../bin/scoreChain
