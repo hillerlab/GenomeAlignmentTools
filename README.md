@@ -43,7 +43,13 @@ make
 
 The subdirectory precompiledBinary_x86_64/ already contains Linux x86_64 compiled binaries.
 
+# RepeatFiller
+RepeatFiller [5] is a tool to incorporate newly-detected repeat-overlapping alignments into pairwise alignment chains [4]. Its runtime adds little to the computationally more expensive step of generating chains in pairwise whole-genome alignments. RepeatFiller circumvents the problem that considering all repeat-overlapping alignment seeds during whole genome alignment is computationally not feasible. Therefore, RepeatFiller only aligns local genomic regions that are bounded by colinear aligning blocks, as provided in the chains, which makes it feasible to consider all seeds including those that overlap repetive regions. RepeatFiller application to mammalian genome alignment chains can add between 22 and 84 Mb of previously-undetected alignments that mostly originate from transposable elements [5]. This helps to comprehensively align repetitive regions and improves the annotation of conserved non-coding elements. 
 
+__Usage:__
+```
+coming soon
+```
 
 # Highly-sensitive local alignments
 patchChain.perl performs a highly sensitive local pairwise alignment for loci flanked by aligning blocks [1,3]. 
@@ -221,3 +227,6 @@ Call NetFilterNonNested.perl without any parameters to see all filtering options
 [3] Hiller M, Agarwal S, Notwell JH, Parikh R, Guturu H, Wenger AM, Bejerano G. [Computational methods to detect conserved non-genic elements in phylogenetically isolated genomes: application to zebrafish](https://academic.oup.com/nar/article-lookup/doi/10.1093/nar/gkt557). Nucleic Acids Res, 41(15):e151. 
 
 [4] Kent WJ, Baertsch R, Hinrichs A, Miller W, Haussler D. [Evolution's cauldron: duplication, deletion, and rearrangement in the mouse and human genomes](http://www.pnas.org/content/100/20/11484.long). PNAS, 100(20):11484-9, 2003 
+
+[5] Osipova E, Hecker N, Hiller M. RepeatFiller newly identifies megabases of aligning repetitive sequences and improves annotations of conserved non-coding elements, submitted
+
