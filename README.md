@@ -52,7 +52,8 @@ RepeatFiller.py -c in.chain -T2 target.2bit -Q2 query.2bit [options]
 	in.chain	alignment file in chain format
 	target.2bit	full path to a .2bit file of reference species
 	query.2bit	full path to a .2bit file of query species
-	[options]	call RepeatFiller.py --help to see the full parameter list with description
+	[options]	call RepeatFiller.py --help to see the full list of parameters controlling 
+	   		size and score thresholds of chains, and lastz and chaining options
 
 example: RepeatFiller.py -c hg38.speTri2.all.chain -T2 hg38.2bit -Q2 speTri2.2bit
 ```
