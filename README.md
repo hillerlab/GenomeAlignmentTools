@@ -235,5 +235,5 @@ Call NetFilterNonNested.perl without any parameters to see all filtering options
 
 [4] Kent WJ, Baertsch R, Hinrichs A, Miller W, Haussler D. [Evolution's cauldron: duplication, deletion, and rearrangement in the mouse and human genomes](http://www.pnas.org/content/100/20/11484.long). PNAS, 100(20):11484-9, 2003 
 
-[5] Osipova E, Hecker N, Hiller M. RepeatFiller newly identifies megabases of aligning repetitive sequences and improves annotations of conserved non-coding elements, submitted
+[5] Osipova E, Hecker N, Hiller M. RepeatFiller newly identifies megabases of aligning repetitive sequences and improves annotations of conserved non-exonic elements, submitted
 
