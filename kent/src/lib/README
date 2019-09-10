@@ -1,0 +1,13 @@
+This directory contains general purpose, web oriented,
+and computational biology oriented modules,  as well
+as some less general stuff associated with the Intronerator
+web site.  Initially this library was created by Jim
+Kent from 1999 to 2001.  Since then other programmers have
+also added to it.  Jim continues to make substantial
+contributions.
+
+With the exception of the gifcomp.c module, all 
+modules here are free for all use - public, private,
+or commercial. The gifcomp.c module contains code
+originally distributed by CompuServe under a similar
+"free for all" license and the Unisys LZW patent expired in 2003.

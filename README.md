@@ -226,6 +226,22 @@ NetFilterNonNested.perl -doScoreFilter -keepSynNetsWithScore 3000 -keepInvNetsWi
 Call NetFilterNonNested.perl without any parameters to see all filtering options.
 
 
+
+# Kent source code (light-weight)
+
+The 'kent' subdirectory contains a light-weight version of the Kent source code, which will only compile tools for generating or working
+with genome alignment chains and nets.
+To compile the light-weight version of Kent tools run make in the Kent source directory:
+
+```
+cd kent/src
+make
+```
+
+For further details refer to 'kent/README.txt'.
+
+
+
 # References
 [1] Sharma V, Hiller M. [Increased alignment sensitivity improves the usage of genome alignments for comparative gene annotation](https://academic.oup.com/nar/article/45/14/8369/3875570/Increased-alignment-sensitivity-improves-the-usage?guestAccessKey=52de9f40-1303-4493-96e9-30def93a259c). Nucleic Acids Res., 45(14), 8369–8377, 2017
 

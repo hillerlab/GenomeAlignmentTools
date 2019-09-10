@@ -1,0 +1,31 @@
+# A variant that is famously known as "MTHFR C677T" or "MTHFR 677C>T" -- but the 677 is incorrect (from an old sequence ~1995):
+NM_005957.4:c.665C>T
+# Same variant in LRG transcript, protein and genomic coords:
+LRG_726t1:c.665C>T
+LRG_726p1:p.Ala222Val
+LRG_726:g.14783C>T
+
+# These three are equivalent (although p. is less specific):
+NM_003002.3:c.276C>A
+NP_002993.1:p.Asp92Glu
+NP_002993.1:p.D92E
+
+# This is not HGVS but seems to be a commonly requested format and is easy to transform into the internal representation of HGVS:
+ALK G1494E
+
+# More gene symbol HGVS-ish
+RERE:Thr758Serfs
+GBA:p.Leu29Alafs*18
+H6PD Val320=
+MTHFR Pro101_Gly102insLeuTyrIleAspValThrTrpHisProAlaGlyAspPro
+YARS p.Val153_Val156del
+PLOD1 Glu532del
+PPT1 p.Gln91_Cys96delinsPhe
+PLOD1:p.532
+# From a user via b0b:
+NM_198056.2:pAla735Val
+NM_198056.2:pArg1512Trp
+
+NM_003098.2:c.287G>C
+NM_007294.3:c.2231C>A
+NM_007294.3(BRCA1):c.2231C>A

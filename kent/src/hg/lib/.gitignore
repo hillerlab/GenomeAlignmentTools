@@ -1,0 +1,4 @@
+jWest*.h
+*.gcov
+*.gcda
+*.gcno
