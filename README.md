@@ -13,30 +13,36 @@ These tools integrate into the standard lastz/chain/net workflow of genome align
 
 # Requirements
 * install [lastz](http://www.bx.psu.edu/~rsharris/lastz/)
-* install the Kent (UCSC) source code by doing
+* install the light-weight Kent (UCSC) source code by doing
 ```
-# go to whereever you want to have the Kent source code
+# go to whereever you want to have the GenomeAlignmentTools including Kent source code
 cd /path/to/
 # git clone and make the libraries
-git clone https://github.com/ucscGenomeBrowser/kent.git kent
-cd kent
-export USE_SAMTABIX=0
-export USE_SSL=1
-cd src  && make libs && cd ../..
+git clone https://github.com/hillerlab/GenomeAlignmentTools.git
+
+cd GenomeAlignmentTools/kent/src
+
+make
+
+
 ```
 These binaries should be located in a directory that is added to your $PATH environment variable. 
+
+If you are using BASH, for example, add following lines to your ~/.bashrc:
+
+# Kent binaries
+PATH=$PATH:/path/to/GenomeAlignmentTools/kent/bin;export PATH
 
 # Installation
 The perl and python scripts just need to be copied to a directory that is contained in your $PATH environment variable. 
 Only chainCleaner and the modified chainNet (with the -rescore option) need to be compiled. 
 Since both tools need the Kent (UCSC) source code, you need to set the KENTSRC_DIR variable to the path to the kent source code (should end with kent/src/).
 ```
-export KENTSRC_DIR=/path/to/kent/src/
+export KENTSRC_DIR=/path/to/GenomeAlignmentTools/kent/src/
 ```
 Afterwards, compile chainCleaner, chainNet and scoreChain
 ```
-git clone https://github.com/hillerlab/GenomeAlignmentTools.git
-cd GenomeAlignmentTools/src
+cd /path/to/GenomeAlignmentTools/src
 export MACHTYPE=x86_64
 make 
 ```
