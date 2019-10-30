@@ -24,14 +24,15 @@ cd GenomeAlignmentTools/kent/src
 
 make
 
-
 ```
 These binaries should be located in a directory that is added to your $PATH environment variable. 
 
 If you are using BASH, for example, add following lines to your ~/.bashrc:
 
+```
 # Kent binaries
 PATH=$PATH:/path/to/GenomeAlignmentTools/kent/bin;export PATH
+```
 
 # Installation
 The perl and python scripts just need to be copied to a directory that is contained in your $PATH environment variable. 
