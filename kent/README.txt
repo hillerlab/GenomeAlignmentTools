@@ -22,11 +22,15 @@ Dependencies
 * GCC including development environment; tested with: gcc (GCC) 6.2.0
 - math library: libm
 
-* openSSL libraries: libssl and libcrypto
+* openSSL libraries including development environment (e.g. libssl-dev): libssl and libcrypto 
 
-* compression library zlib: libz
+* compression library zlib including development environment (e.g. zlib1g-dev): libz 
+
+* uuid library including development environment (e.g. uuid-dev): libuuid
 
 * pthreads library: lpthreads
+
+
 
 
 
