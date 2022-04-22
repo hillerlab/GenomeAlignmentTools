@@ -11,7 +11,6 @@ UTILS_APPLIST = \
 	chainAntiRepeat \
 	chainFilter \
 	chainMergeSort \
-	chainNet \
 	chainPreNet \
 	chainSort \
 	netToAxt \
