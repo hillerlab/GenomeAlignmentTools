@@ -1,10 +1,11 @@
 /* chainFilter - Filter chain files. */
 
 /* Copyright (C) 2014 The Regents of the University of California 
- * See README in this or parent directory for licensing information. */
+ * See kent/LICENSE or http://genome.ucsc.edu/license/ for licensing information. */
 #include "common.h"
 #include "linefile.h"
 #include "hash.h"
+#include "obscure.h"
 #include "options.h"
 #include "chainBlock.h"
 
@@ -22,6 +23,9 @@ errAbort(
   "   -t=chr1,chr2 - restrict target side sequence to those named\n"
   "   -notT=chr1,chr2 - restrict target side sequence to those not named\n"
   "   -id=N - only get one with ID number matching N\n"
+  "   -idList=N,N,... - only get chains with IDs matching the IDs in the given list of numbers\n"
+  "   -idFile=file - only get chains with IDs listed in the given file (one ID per line)\n"
+  "   -idExcludeFile=file - only get chains with IDs NOT listed in the given file (one ID per line)\n"
   "   -minScore=N - restrict to those scoring at least N\n"
   "   -maxScore=N - restrict to those scoring less than N\n"
   "   -qStartMin=N - restrict to those with qStart at least N\n"
@@ -59,6 +63,9 @@ struct optionSpec options[] = {
    {"t", OPTION_STRING},
    {"notT", OPTION_STRING},
    {"id", OPTION_INT},
+   {"idList", OPTION_STRING},
+   {"idFile", OPTION_STRING},
+   {"idExcludeFile", OPTION_STRING},
    {"minScore", OPTION_FLOAT},
    {"maxScore", OPTION_FLOAT},
    {"qStartMin", OPTION_INT},
@@ -88,6 +95,10 @@ struct optionSpec options[] = {
    {"noHap", OPTION_BOOLEAN},
    {NULL, 0},
 };
+
+char *clIDFile = NULL; /* file containing list of IDs */
+char *clIDExcludeFile = NULL; /* file containing list of IDs */
+
 
 struct hash *hashCommaString(char *s)
 /* Make hash out of comma separated string. */
@@ -221,10 +232,24 @@ int tMaxSize = optionInt("tMaxSize", BIGNUM);
 char *strand = optionVal("strand", NULL);
 boolean zeroGap = optionExists("zeroGap");
 int id = optionInt("id", -1);
+/* hash containing all IDs from the input list */
+struct hash *idListHash = hashCommaOption("idList");
+/* hash containing all IDs from the input file */
+struct hash *idListHashFile = NULL;
+if (clIDFile != NULL) {
+	idListHashFile = hashWordsInFile(clIDFile, 0);
+}	
+/* hash containing all IDs from the input file */
+struct hash *idExcludeListHashFile = NULL;
+if (clIDExcludeFile != NULL) {
+	idExcludeListHashFile = hashWordsInFile(clIDExcludeFile, 0);
+}	
 boolean doLong = optionExists("long");
 boolean noRandom = optionExists("noRandom");
 boolean noHap = optionExists("noHap");
 int i;
+char idbuf[30];
+
 
 for (i=0; i<inCount; ++i)
     {
@@ -266,6 +291,21 @@ for (i=0; i<inCount; ++i)
 	    writeIt = FALSE;
 	if (id >= 0 && id != chain->id)
 	    writeIt = FALSE;
+	if (idListHash != NULL) { 
+	    sprintf(idbuf, "%d", chain->id);
+	    if (! hashLookup(idListHash, idbuf))
+	        writeIt = FALSE;
+	}
+	if (idListHashFile != NULL) { 
+	    sprintf(idbuf, "%d", chain->id);
+	    if (! hashLookup(idListHashFile, idbuf))
+	        writeIt = FALSE;
+	}
+	if (idExcludeListHashFile != NULL) { 
+	    sprintf(idbuf, "%d", chain->id);
+	    if (hashLookup(idExcludeListHashFile, idbuf))
+	        writeIt = FALSE;
+	}
 	if (minGapless != 0)
 	    {
 	    if (!(calcMaxGapless(chain) >= minGapless))
@@ -321,6 +361,8 @@ int main(int argc, char *argv[])
 /* Process command line. */
 {
 optionInit(&argc, argv, options);
+clIDFile = optionVal("idFile", clIDFile);
+clIDExcludeFile = optionVal("idExcludeFile", clIDExcludeFile);
 if (argc < 2)
     usage();
 chainFilter(argc-1, argv+1);
