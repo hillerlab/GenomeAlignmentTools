@@ -1,3 +1,5 @@
+**If you are only interested in generating alignment chains (e.g. as input for [TOGA](https://github.com/hillerlab/TOGA)), we recommend using our [lastz_make_chains](https://github.com/hillerlab/make_lastz_chains) pipeline that fully automates lastz, axtChain, RepeatFiller and chainCleaner.**
+
 # Genome Alignment Tools
 
 This repository provides tools for improving the sensitivity and specificity of pairwise genome alignments [1,2,3]. These tools make use of [lastz](http://www.bx.psu.edu/~rsharris/lastz/) and the alignment chain and net concept [4]. 
